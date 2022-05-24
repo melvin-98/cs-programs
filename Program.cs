@@ -5,45 +5,74 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace carpetcalculator
+
+namespace ConsoleApp2
 {
     internal class Program
     {
-        public static double unitConversion(double n1, double n2,int convertconst)
+        public static int obtaintime()
+            {
+            int h;
+            int m;
+            string inputval;
+            const int mperhours = 60;
+            int totalminutes;
+            WriteLine("pls enter total hours");
+    
+            inputval = ReadLine();
+            h = int.Parse(inputval);
+            WriteLine("pls enter total minutes");
+
+            inputval = ReadLine();
+            m = int.Parse(inputval);
+            totalminutes = m + (h / mperhours);
+            return totalminutes;
+            }
+        public static double calculatestrides()
+
         {
-            return n1 + (double)n2 /convertconst;
-        }
+            int firstms;
+            int lastms;
+            
+            string inputval;
+            double avgstrides;
+            
+            WriteLine("pls enter strides made in first minute");
+
+            inputval = ReadLine();
+            firstms = int.Parse(inputval);
+            WriteLine("pls enter strides made in last minute");
+
+            inputval = ReadLine();
+            lastms = int.Parse(inputval);
+            avgstrides = (firstms+lastms)/2.0;
+            return avgstrides;
+            
+            }
+
+
         static void Main(string[] args)
         {
-            const int inchesperfoot = 12;
-            const int sqft_sqyd = 9;
-            const double priceberber= 27.95;
-            const double  pricepile=15.95;
-            int roomlFeet = 12;
-            int roomlInches = 2;
-            int roomWfeet = 14;
-            int roomWinches = 7;
-            /* convert unit to feet
-          * caluculate area
-          * convert area to square yard
-          * calculate total cost */
-            double roomL;
-            double roomW;
-            roomL = unitConversion(roomlFeet,inchesperfoot,inchesperfoot);
-            roomW = unitConversion(roomWfeet, inchesperfoot, inchesperfoot);
+            /*input time
+             *return in minutes
+             *input strides
+             *return average stridesinAminute
+             *calculate distance in m*/
+            const double stride_to_feet = 2.5;
+            double feetperminute;
+            double totalfeet;
+            double totalmiles;
+            int totaltimeinminutes;
+            double averagestrides;
             
-            double area = roomW * roomL;
-            //roomW = roomWfeet + (double)roomWinches / inchesperfoot;
-            
-            double areasqyd =unitConversion(0,area,sqft_sqyd);
-            
-            //double area=(roomW*roomL)/sqft_sqyd;
-            WriteLine("the area is {0,0:F4} in SQyard", areasqyd);
-            double totalcostberber;
-            totalcostberber = priceberber * area;
-            double totalcostpile = pricepile * area;
-            WriteLine("");
-            ReadKey();
+            totaltimeinminutes = obtaintime();
+            averagestrides=calculatestrides();
+           
+            feetperminute = stride_to_feet * averagestrides;
+            totalfeet = feetperminute * totaltimeinminutes;
+            totalmiles = totalfeet / 5280.0;
+            WriteLine("total mile" + totalmiles);
+            ReadKey(); 
         }
     }
 }
